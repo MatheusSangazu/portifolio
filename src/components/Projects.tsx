@@ -34,9 +34,10 @@ const projects: Project[] = [
     id: "03",
     title: "Canivete Suíço",
     description:
-      "Toolkit de engenharia de dados para higienização massiva de leads. Processamento assíncrono de arquivos e automação de pipelines de mídia.",
+      "Kit de ferramentas de engenharia de dados para higienização massiva de leads. Processamento assíncrono de arquivos e automação de pipelines de mídia.",
     stack: ["Python", "Streamlit", "Pandas", "Docker", "FFmpeg"],
     github: "https://github.com/MatheusSangazu/formatador",
+    live: "https://formatador.forjacorp.com/",
   },
   {
     id: "04",
