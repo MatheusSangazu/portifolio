@@ -49,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${inter.variable} ${plusJakarta.variable} ${playfair.variable} ${jetbrainsMono.variable} antialiased`}>
-      <body className="min-h-screen relative overflow-x-hidden bg-background" style={{ cursor: "none" }}>
+      <body className="min-h-screen relative overflow-x-hidden bg-background">
         <CursorTrail />
         <div className="glow-mesh" />
         <Navbar />

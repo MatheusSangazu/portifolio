@@ -81,6 +81,15 @@
   .animate-poker-glow {
     animation: poker-glow 3s ease-in-out infinite;
   }
+
+  @keyframes warp-in {
+    0% { opacity: 0; transform: scale(1.5) perspective(500px) rotateX(30deg); }
+    100% { opacity: 1; transform: scale(1) perspective(500px) rotateX(0deg); }
+  }
+
+  .animate-warp-in {
+    animation: warp-in 0.8s ease-out forwards;
+  }
 }
 
 @layer utilities {
@@ -98,6 +107,11 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  cursor: none !important;
+}
+
+body * {
+  cursor: none !important;
 }
 
 ::selection {

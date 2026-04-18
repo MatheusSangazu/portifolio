@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { FadeIn } from "./FadeIn";
 import { FiGithub, FiLinkedin, FiMail, FiTerminal, FiChevronRight } from "react-icons/fi";
 
@@ -24,11 +26,88 @@ const contactLinks = [
   },
 ];
 
+const OVERSCROLL_THRESHOLD = 5;
+
 export function Contact() {
+  const router = useRouter();
+  const [warpOut, setWarpOut] = useState(false);
+  const overScrollCountRef = useRef(0);
+  const lastResetRef = useRef(Date.now());
+  const [hintOpacity, setHintOpacity] = useState(0);
+
+  const checkBottomAndScroll = useCallback((deltaY: number) => {
+    const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 5;
+
+    if (deltaY < 0 && overScrollCountRef.current > 0) {
+      overScrollCountRef.current = 0;
+      lastResetRef.current = Date.now();
+      setHintOpacity(0);
+      return;
+    }
+
+    if (!isAtBottom || deltaY <= 0) {
+      const now = Date.now();
+      if (now - lastResetRef.current > 2000) {
+        overScrollCountRef.current = 0;
+        lastResetRef.current = now;
+        setHintOpacity(0);
+      }
+      return;
+    }
+
+    overScrollCountRef.current++;
+    lastResetRef.current = Date.now();
+
+    const progress = Math.min(overScrollCountRef.current / OVERSCROLL_THRESHOLD, 1);
+    setHintOpacity(progress);
+
+    if (overScrollCountRef.current >= OVERSCROLL_THRESHOLD) {
+      overScrollCountRef.current = 0;
+      setHintOpacity(0);
+      setWarpOut(true);
+      setTimeout(() => {
+        router.push("/game");
+      }, 600);
+    }
+  }, [router]);
+
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      checkBottomAndScroll(e.deltaY);
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      const touch = e.changedTouches[0];
+      if (touch && touch.clientY < (e.target as HTMLElement)?.getBoundingClientRect().top) {
+        checkBottomAndScroll(100);
+      }
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [checkBottomAndScroll]);
+
   return (
-    <section id="contato" className="py-32 px-6 bg-background border-t border-border relative overflow-hidden">
+    <section id="contato" className={`py-32 px-6 bg-background border-t border-border relative overflow-hidden transition-all duration-500 ${warpOut ? "opacity-0 scale-95" : ""}`}>
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-full h-px bg-gradient-to-r from-transparent via-purple-primary/20 to-transparent" />
+
+      {/* Overscroll Hint */}
+      {hintOpacity > 0 && (
+        <div
+          className="fixed bottom-0 left-0 right-0 flex items-center justify-center pb-8 z-50 pointer-events-none"
+          style={{ opacity: hintOpacity }}
+        >
+          <div className="font-mono text-[10px] tracking-[0.5em] uppercase text-brand-primary animate-pulse">
+            . . .
+          </div>
+        </div>
+      )}
       
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">

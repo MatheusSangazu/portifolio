@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 interface Vec2 {
   x: number;
@@ -140,6 +141,7 @@ function drawShip(ctx: CanvasRenderingContext2D, x: number, y: number, angle: nu
 }
 
 export function CursorTrail() {
+  const pathname = usePathname();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef<Vec2>({ x: -200, y: -200 });
   const shipRef = useRef<Vec2>({ x: -200, y: -200 });
@@ -435,11 +437,14 @@ export function CursorTrail() {
     };
   }, []);
 
+  const isGame = pathname.startsWith("/game");
+
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-[100] hidden md:block"
-      style={{ cursor: "none" }}
-    />
+    <div className={`fixed inset-0 z-[100] hidden md:block pointer-events-none ${isGame ? "invisible" : ""}`}>
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none"
+      />
+    </div>
   );
 }
