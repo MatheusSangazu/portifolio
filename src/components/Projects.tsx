@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FadeIn } from "./FadeIn";
-import { FiExternalLink, FiGithub, FiTerminal, FiChevronRight } from "react-icons/fi";
+import { FiExternalLink, FiGithub, FiTerminal, FiChevronRight, FiBookOpen } from "react-icons/fi";
 
 interface Project {
   title: string;
@@ -10,6 +10,7 @@ interface Project {
   stack: string[];
   github?: string;
   live?: string;
+  caseStudy?: string;
   id: string;
 }
 
@@ -43,9 +44,10 @@ const projects: Project[] = [
     id: "04",
     title: "Check Fácil",
     description:
-      "Sistema de controle de acesso distribuído. API RESTful com autenticação JWT e arquitetura de webhooks para eventos em tempo real.",
+      "Plataforma PWA para gestão de eventos infantis que une segurança e captação de leads. Desenvolvida em monorepo, a solução automatiza o check-in em tempo real, gerencia convidados e integra cronogramas diretamente com o Google Agenda.",
     stack: ["Node.js", "Express", "Sequelize", "MySQL", "JWT"],
     github: "https://github.com/MatheusSangazu/check-facil-api",
+    caseStudy: "/check-facil",
   },
   {
     id: "05",
@@ -69,7 +71,7 @@ const projects: Project[] = [
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <FadeIn delay={index * 0.1} direction="up">
-      <div className="group relative bg-surface border border-border p-8 hover:bg-surface-hover transition-all duration-300 h-full flex flex-col font-mono">
+      <div className="group relative bg-surface border border-border p-5 sm:p-8 hover:bg-surface-hover transition-all duration-300 h-full flex flex-col font-mono">
         <div className="flex justify-between items-start mb-12">
           <span className="text-brand-primary text-2xl font-bold opacity-20 group-hover:opacity-100 transition-opacity">
             {project.id}
@@ -83,6 +85,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             {project.live && (
               <a href={project.live} target="_blank" className="text-text-muted hover:text-brand-primary transition-colors">
                 <FiExternalLink size={20} />
+              </a>
+            )}
+            {project.caseStudy && (
+              <a href={project.caseStudy} className="text-text-muted hover:text-brand-primary transition-colors">
+                <FiBookOpen size={20} />
               </a>
             )}
           </div>
@@ -117,14 +124,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export function Projects() {
   return (
-    <section id="projetos" className="py-24 px-6 bg-background border-t border-border relative">
+    <section id="projetos" className="py-16 sm:py-24 px-6 bg-background border-t border-border relative">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col mb-20">
+        <div className="flex flex-col mb-12 sm:mb-20">
           <FadeIn direction="up">
             <div className="font-mono text-xs text-brand-primary mb-4 tracking-[0.3em] uppercase">
               // git.log --oneline
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-6 sm:mb-8 text-white">
               REPOSITÓRIOS<br />
               <span className="text-brand-primary italic font-serif text-[0.8em]">Selecionados.</span>
             </h2>

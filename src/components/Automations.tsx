@@ -122,14 +122,14 @@ const automationFlows = [
 
 export function Automations() {
   return (
-    <section id="automacoes" className="py-32 px-6 bg-background border-t border-border/50 relative overflow-hidden">
+    <section id="automacoes" className="py-16 sm:py-32 px-6 bg-background border-t border-border/50 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-24">
+        <div className="mb-12 sm:mb-24">
           <FadeIn direction="up">
             <div className="font-mono text-[10px] text-brand-primary mb-6 tracking-[0.4em] uppercase">
               // automation_service.workflow_v2
             </div>
-            <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-white mb-10 leading-[0.85]">
+            <h2 className="text-4xl sm:text-5xl md:text-8xl font-bold tracking-tighter text-white mb-8 sm:mb-10 leading-[0.85]">
               ORQUESTRAÇÃO DE<br />
               <span className="text-brand-primary italic font-serif text-[0.8em]">Sistemas.</span>
             </h2>
@@ -141,20 +141,20 @@ export function Automations() {
           </FadeIn>
         </div>
 
-        <div className="space-y-16">
+        <div className="space-y-8 sm:space-y-16">
           {automationFlows.map((flow, i) => (
             <FadeIn key={i} delay={0.3}>
               <div className="grid grid-cols-1 lg:grid-cols-12 bg-surface/30 border border-border group hover:border-brand-primary/20 transition-all duration-500 overflow-hidden rounded-sm">
                 
-                <div className="lg:col-span-5 p-10 md:p-14 border-b lg:border-b-0 lg:border-r border-border bg-surface/20">
-                  <h3 className="text-2xl font-bold mb-8 tracking-tighter text-white uppercase font-mono leading-tight group-hover:text-brand-primary transition-colors duration-500">
+                <div className="lg:col-span-5 p-6 sm:p-10 md:p-14 border-b lg:border-b-0 lg:border-r border-border bg-surface/20">
+                  <h3 className="text-lg sm:text-2xl font-bold mb-6 sm:mb-8 tracking-tighter text-white uppercase font-mono leading-tight group-hover:text-brand-primary transition-colors duration-500">
                     {flow.title}
                   </h3>
-                  <p className="text-text-muted text-sm mb-10 leading-relaxed font-sans italic">
+                  <p className="text-text-muted text-sm mb-8 sm:mb-10 leading-relaxed font-sans italic">
                     {flow.description}
                   </p>
                   
-                  <div className="bg-brand-primary/5 border-l-2 border-brand-primary p-8 mb-10">
+                  <div className="bg-brand-primary/5 border-l-2 border-brand-primary p-6 sm:p-8 mb-8 sm:mb-10">
                     <span className="text-[9px] font-mono text-brand-primary uppercase tracking-[0.3em] block mb-3">Impact_Analysis</span>
                     <p className="text-sm text-foreground font-medium leading-relaxed">
                       {flow.impact}
@@ -170,7 +170,7 @@ export function Automations() {
                   </div>
                 </div>
 
-                <div className="lg:col-span-7 p-10 md:p-14 bg-background/30 relative">
+                <div className="lg:col-span-7 p-6 sm:p-10 md:p-14 bg-background/30 relative">
                   {flow.videoUrl ? (
                     <div className="relative h-full min-h-[350px] flex flex-col justify-center">
                       <div className="absolute inset-0 tech-grid opacity-20" />

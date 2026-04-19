@@ -93,7 +93,7 @@ export function Contact() {
   }, [checkBottomAndScroll]);
 
   return (
-    <section id="contato" className={`py-32 px-6 bg-background border-t border-border relative overflow-hidden transition-all duration-500 ${warpOut ? "opacity-0 scale-95" : ""}`}>
+    <section id="contato" className={`py-16 sm:py-32 px-6 bg-background border-t border-border relative overflow-hidden transition-all duration-500 ${warpOut ? "opacity-0 scale-95" : ""}`}>
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-full h-px bg-gradient-to-r from-transparent via-purple-primary/20 to-transparent" />
 
@@ -117,12 +117,12 @@ export function Contact() {
               <div className="font-mono text-[10px] text-brand-primary mb-6 tracking-[0.4em] uppercase">
                 // system.exit()
               </div>
-              <h2 className="text-5xl md:text-8xl font-bold tracking-tighter mb-10 uppercase text-white leading-[0.85]">
+              <h2 className="text-4xl sm:text-5xl md:text-8xl font-bold tracking-tighter mb-8 sm:mb-10 uppercase text-white leading-[0.85]">
                 VAMOS<br />
                 <span className="text-brand-primary italic font-serif text-[0.8em]">Conversar.</span>
               </h2>
               <p className="text-text-muted text-lg max-w-md font-sans leading-relaxed border-l border-brand-primary/20 pl-8">
-                Estou sempre aberto a novos desafios técnicos, parcerias em sistemas distribuídos ou apenas um café (virtual ou real).
+                Estou sempre aberto a novos desafios técnicos, parcerias em sistemas distribuídos ou apenas um café, ou uma coca geladinha.
               </p>
             </div>
           </FadeIn>
@@ -134,7 +134,7 @@ export function Contact() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between p-8 bg-surface border border-border hover:border-brand-primary/40 transition-all duration-500 font-mono rounded-sm"
+                  className="group flex items-center justify-between p-5 sm:p-8 bg-surface border border-border hover:border-brand-primary/40 transition-all duration-500 font-mono rounded-sm"
                 >
                   <div className="flex items-center gap-6">
                     <div className="p-4 bg-background border border-border group-hover:border-brand-primary/30 transition-all duration-500">
@@ -155,7 +155,7 @@ export function Contact() {
         </div>
 
         {/* Footer Minimalista Integrado */}
-        <div className="mt-32 pt-16 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-8 font-mono text-[9px] text-text-muted tracking-[0.3em] uppercase opacity-60">
+        <div className="mt-16 sm:mt-32 pt-12 sm:pt-16 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8 font-mono text-[8px] sm:text-[9px] text-text-muted tracking-[0.2em] sm:tracking-[0.3em] uppercase opacity-60">
           <div className="flex items-center gap-3">
             <span className="w-1.5 h-1.5 bg-brand-primary rounded-full animate-pulse shadow-[0_0_8px_var(--color-brand-primary)]" />
             READY_FOR_NEW_CHALLENGES

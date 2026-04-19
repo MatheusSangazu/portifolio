@@ -111,7 +111,7 @@ function TimelineItem({
 
 export function Experience() {
   return (
-    <section id="experiencia" className="py-24 px-6 bg-surface/30">
+    <section id="experiencia" className="py-16 sm:py-24 px-6 bg-surface/30">
       <div className="max-w-3xl mx-auto">
         <SectionTitle
           title="Experiência"

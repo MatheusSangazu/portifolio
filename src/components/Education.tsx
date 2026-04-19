@@ -40,7 +40,7 @@ const skills = [
 
 export function Education() {
   return (
-    <section id="educacao" className="py-24 px-6 bg-surface/30">
+    <section id="educacao" className="py-16 sm:py-24 px-6 bg-surface/30">
       <div className="max-w-6xl mx-auto">
         <SectionTitle
           title="Educação & Soft Skills"
@@ -76,7 +76,7 @@ export function Education() {
                 <div className="w-12 h-12 bg-background border border-border flex items-center justify-center shrink-0">
                   <TbDeviceGamepad2 size={24} className="text-brand-primary" />
                 </div>
-                <h3 className="text-lg font-bold text-white uppercase tracking-tighter">4Growthinhos</h3>
+                <h3 className="text-lg font-bold text-white uppercase tracking-tighter">Projeto 4Growthinhos</h3>
               </div>
 
               <div className="flex-1 flex flex-col justify-center">

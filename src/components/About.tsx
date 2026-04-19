@@ -27,7 +27,7 @@ const skills = [
 
 export function About() {
   return (
-    <section id="sobre" className="py-32 px-6 relative bg-background border-t border-border/50">
+    <section id="sobre" className="py-16 sm:py-32 px-6 relative bg-background border-t border-border/50">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-20 lg:gap-32">
           
@@ -36,7 +36,7 @@ export function About() {
               <div className="font-mono text-[10px] text-brand-primary mb-6 tracking-[0.4em] uppercase">
                 // system_manifest.json
               </div>
-              <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tighter text-white leading-[0.9]">
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-10 sm:mb-12 tracking-tighter text-white leading-[0.9]">
                 CÓDIGO QUE<br />
                 <span className="text-brand-primary italic font-serif">Escala Negócios.</span>
               </h2>
@@ -64,18 +64,17 @@ export function About() {
 
               <FadeIn delay={0.6}>
                 <p>
-                  Embora ferramentas de automação (n8n, Make) façam parte do meu arsenal, minha base é o <span className="text-white font-medium italic">desenvolvimento puro</span>. 
-                  Acredito que a automação só é poderosa quando apoiada por uma base de código sólida e bem arquitetada.
+                  Minha atuação se divide entre o desenvolvimento de código puro e a arquitetura de automações avançadas com n8n e Make. Construo desde APIs dedicadas até pipelines de dados complexos em low-code, garantindo a melhor ferramenta para cada contexto.
                 </p>
               </FadeIn>
             </div>
           </div>
 
-          <div className="lg:w-1/2 flex flex-col justify-center gap-8">
+          <div className="lg:w-1/2 flex flex-col justify-center gap-4 sm:gap-8">
             {skills.map((item, i) => (
               <FadeIn key={i} delay={0.8 + (i * 0.1)} direction="left">
-                <div className="group relative bg-surface/20 border border-border p-8 hover:border-brand-primary/40 transition-all duration-500">
-                  <div className="flex items-start gap-8">
+                <div className="group relative bg-surface/20 border border-border p-5 sm:p-8 hover:border-brand-primary/40 transition-all duration-500">
+                  <div className="flex items-start gap-4 sm:gap-8">
                     <div className="p-5 bg-background border border-border group-hover:border-brand-primary/30 group-hover:shadow-[0_0_20px_rgba(249,115,22,0.1)] transition-all duration-500">
                       <item.icon size={24} className="text-brand-primary/70 group-hover:text-brand-primary transition-colors" />
                     </div>

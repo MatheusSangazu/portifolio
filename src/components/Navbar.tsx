@@ -45,7 +45,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (pathname.startsWith("/game")) return null;
+  if (pathname.startsWith("/game") || pathname.startsWith("/check-facil")) return null;
 
   return (
     <motion.nav

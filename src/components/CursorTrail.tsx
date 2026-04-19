@@ -83,7 +83,7 @@ function spawnAsteroid(w: number, h: number): Asteroid {
   };
 }
 
-function drawShip(ctx: CanvasRenderingContext2D, x: number, y: number, angle: number, defenseMode: boolean) {
+function drawShip(ctx: CanvasRenderingContext2D, x: number, y: number, angle: number, defenseMode: boolean, color: string = "249, 115, 22") {
   ctx.save();
   ctx.translate(x, y);
   ctx.rotate(angle);
@@ -99,7 +99,7 @@ function drawShip(ctx: CanvasRenderingContext2D, x: number, y: number, angle: nu
     ctx.lineTo(-s * 0.3, s * 0.4);
     ctx.lineTo(-s * 0.4, -s * 0.6);
     ctx.closePath();
-    ctx.fillStyle = "rgba(249, 115, 22, 0.06)";
+    ctx.fillStyle = `rgba(${color}, 0.06)`;
     ctx.fill();
   }
 
@@ -112,28 +112,28 @@ function drawShip(ctx: CanvasRenderingContext2D, x: number, y: number, angle: nu
   ctx.lineTo(-s * 0.45, s * 0.5);
   ctx.closePath();
 
-  ctx.strokeStyle = defenseMode ? "rgba(249, 115, 22, 0.95)" : "rgba(249, 115, 22, 0.7)";
+  ctx.strokeStyle = defenseMode ? `rgba(${color}, 0.95)` : `rgba(${color}, 0.7)`;
   ctx.lineWidth = 1.5;
   ctx.stroke();
-  ctx.fillStyle = defenseMode ? "rgba(249, 115, 22, 0.12)" : "rgba(249, 115, 22, 0.05)";
+  ctx.fillStyle = defenseMode ? `rgba(${color}, 0.12)` : `rgba(${color}, 0.05)`;
   ctx.fill();
 
   ctx.beginPath();
   ctx.arc(0, 0, 2.5, 0, Math.PI * 2);
-  ctx.fillStyle = defenseMode ? "#F97316" : "rgba(249, 115, 22, 0.8)";
+  ctx.fillStyle = defenseMode ? `rgb(${color})` : `rgba(${color}, 0.8)`;
   ctx.fill();
 
   if (defenseMode) {
     ctx.beginPath();
     ctx.moveTo(0, -s * 0.9);
     ctx.lineTo(0, -s * 1.6);
-    ctx.strokeStyle = "rgba(249, 115, 22, 0.5)";
+    ctx.strokeStyle = `rgba(${color}, 0.5)`;
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
     ctx.beginPath();
     ctx.arc(0, -s * 1.7, 3, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(249, 115, 22, 0.3)";
+    ctx.fillStyle = `rgba(${color}, 0.3)`;
     ctx.fill();
   }
 
@@ -154,6 +154,7 @@ export function CursorTrail() {
   const lastLaserRef = useRef(0);
   const defenseModeRef = useRef(false);
   const asteroidTimerRef = useRef(0);
+  const overBrandRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -177,6 +178,16 @@ export function CursorTrail() {
       mouseRef.current = { x: e.clientX, y: e.clientY };
       lastMoveRef.current = Date.now();
       defenseModeRef.current = false;
+
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      if (el) {
+        const style = getComputedStyle(el);
+        const color = style.color.toLowerCase();
+        const bgColor = style.backgroundColor.toLowerCase();
+        const isBrand = (c: string) =>
+          c.includes("249, 115, 22") || c.includes("251, 146, 60") || c.includes("194, 65, 12");
+        overBrandRef.current = isBrand(color) || isBrand(bgColor) || isBrand(style.borderColor.toLowerCase());
+      }
     };
 
     const handleClick = () => {
@@ -408,7 +419,8 @@ export function CursorTrail() {
         ctx.fill();
       }
 
-      drawShip(ctx, shipRef.current.x, shipRef.current.y, shipAngleRef.current, defenseMode);
+      const shipColor = overBrandRef.current ? "255, 255, 255" : "249, 115, 22";
+      drawShip(ctx, shipRef.current.x, shipRef.current.y, shipAngleRef.current, defenseMode, shipColor);
 
       if (defenseMode) {
         const sx = shipRef.current.x;
@@ -438,6 +450,17 @@ export function CursorTrail() {
   }, []);
 
   const isGame = pathname.startsWith("/game");
+
+  useEffect(() => {
+    if (isGame) {
+      document.body.classList.remove("cursor-none");
+    } else {
+      document.body.classList.add("cursor-none");
+    }
+    return () => {
+      document.body.classList.remove("cursor-none");
+    };
+  }, [isGame]);
 
   return (
     <div className={`fixed inset-0 z-[100] hidden md:block pointer-events-none ${isGame ? "invisible" : ""}`}>

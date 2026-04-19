@@ -107,10 +107,10 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
-  cursor: none !important;
 }
 
-body * {
+body.cursor-none,
+body.cursor-none * {
   cursor: none !important;
 }
 

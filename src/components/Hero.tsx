@@ -30,7 +30,7 @@ export function Hero() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-6xl md:text-8xl lg:text-[11rem] font-bold leading-[0.8] tracking-tighter text-white mb-10"
+              className="text-5xl sm:text-6xl md:text-8xl lg:text-[11rem] font-bold leading-[0.8] tracking-tighter text-white mb-10"
             >
               BACKEND<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
@@ -45,8 +45,8 @@ export function Hero() {
               className="flex flex-col md:flex-row gap-10 items-start md:items-center"
             >
               <p className="text-lg md:text-xl text-text-muted max-w-xl leading-relaxed font-sans border-l-2 border-brand-primary/30 pl-8">
-                Especialista em <span className="text-white font-semibold">Arquitetura de Sistemas Distribuídos</span>. 
-                Construindo motores escaláveis e pipelines de dados que sustentam operações globais.
+                Especialista em <span className="text-white font-semibold">Backend e Arquitetura de Sistemas</span>. 
+                Desenvolvo APIs robustas, integrações complexas e infraestruturas escaláveis que fazem produtos digitais funcionarem com segurança e alta performance.
               </p>
               
               <div className="flex flex-col gap-3 font-mono text-[10px] text-brand-primary/60 tracking-widest uppercase">
@@ -62,9 +62,9 @@ export function Hero() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
-              className="relative w-72 h-96 md:w-80 md:h-[30rem]"
+              className="relative w-56 h-72 sm:w-64 sm:h-80 md:w-80 md:h-[30rem]"
             >
-              <div className="absolute inset-0 border border-brand-primary/10 translate-x-6 translate-y-6 -z-10" />
+              <div className="absolute inset-0 border border-brand-primary/10 translate-x-4 translate-y-4 -z-10" />
               
               <div className="w-full h-full bg-surface border border-border overflow-hidden relative group shadow-2xl">
                 <Image
@@ -86,7 +86,7 @@ export function Hero() {
                 </div>
               </div>
 
-              <div className="absolute -left-12 bottom-20 bg-brand-primary text-white px-4 py-2 font-bold text-[10px] -rotate-90 tracking-[0.5em]">
+              <div className="absolute -left-12 bottom-20 bg-brand-primary text-white px-4 py-2 font-bold text-[10px] -rotate-90 tracking-[0.5em] hidden sm:block">
                 SOFTWARE_ENG
               </div>
             </motion.div>
@@ -97,24 +97,24 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="mt-20 flex flex-wrap gap-8 items-center"
+          className="mt-12 sm:mt-20 flex flex-wrap gap-4 sm:gap-8 items-center"
         >
           <a
             href="#projetos"
-            className="px-12 py-5 bg-white text-background font-bold tracking-widest uppercase text-xs hover:bg-brand-primary transition-all duration-300 flex items-center gap-4 group"
+            className="px-6 sm:px-12 py-4 sm:py-5 bg-white text-background font-bold tracking-widest uppercase text-[10px] sm:text-xs hover:bg-brand-primary transition-all duration-300 flex items-center gap-4 group"
           >
             Explore_Code <FiArrowDown className="group-hover:translate-y-1 transition-transform" />
           </a>
           <a
             href="#contato"
-            className="px-12 py-5 border border-border text-white font-bold tracking-widest uppercase text-xs hover:border-brand-primary transition-all duration-300"
+            className="px-6 sm:px-12 py-4 sm:py-5 border border-border text-white font-bold tracking-widest uppercase text-[10px] sm:text-xs hover:border-brand-primary transition-all duration-300"
           >
             Connect_System
           </a>
         </motion.div>
       </div>
 
-      <div className="absolute bottom-12 right-12 flex items-center gap-6 text-text-muted opacity-40">
+      <div className="absolute bottom-12 right-12 hidden md:flex items-center gap-6 text-text-muted opacity-40">
         <span className="font-mono text-[9px] uppercase tracking-[0.8em]">Deployment_Ready_2026</span>
         <div className="w-24 h-[1px] bg-gradient-to-r from-text-muted to-transparent" />
       </div>

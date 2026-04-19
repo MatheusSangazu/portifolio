@@ -112,7 +112,7 @@ function generateStars(w: number, h: number): Star[] {
   return stars;
 }
 
-function drawShip(ctx: CanvasRenderingContext2D, x: number, y: number, angle: number, invincible: boolean) {
+function drawShip(ctx: CanvasRenderingContext2D, x: number, y: number, angle: number, invincible: boolean, color: string = "249, 115, 22") {
   ctx.save();
   ctx.translate(x, y);
   ctx.rotate(angle);
@@ -132,27 +132,27 @@ function drawShip(ctx: CanvasRenderingContext2D, x: number, y: number, angle: nu
   ctx.lineTo(-s * 0.5, s * 0.6);
   ctx.closePath();
 
-  ctx.strokeStyle = "#F97316";
+  ctx.strokeStyle = `rgb(${color})`;
   ctx.lineWidth = 2;
   ctx.stroke();
-  ctx.fillStyle = "rgba(249, 115, 22, 0.1)";
+  ctx.fillStyle = `rgba(${color}, 0.1)`;
   ctx.fill();
 
   ctx.beginPath();
   ctx.arc(0, 0, 3, 0, Math.PI * 2);
-  ctx.fillStyle = "#F97316";
+  ctx.fillStyle = `rgb(${color})`;
   ctx.fill();
 
   ctx.beginPath();
   ctx.moveTo(0, -s * 1.1);
   ctx.lineTo(0, -s * 1.8);
-  ctx.strokeStyle = "rgba(249, 115, 22, 0.6)";
+  ctx.strokeStyle = `rgba(${color}, 0.6)`;
   ctx.lineWidth = 2;
   ctx.stroke();
 
   ctx.beginPath();
   ctx.arc(0, -s * 1.9, 4, 0, Math.PI * 2);
-  ctx.fillStyle = "rgba(249, 115, 22, 0.25)";
+  ctx.fillStyle = `rgba(${color}, 0.25)`;
   ctx.fill();
 
   ctx.globalAlpha = 1;
@@ -186,6 +186,7 @@ export function SpaceGame() {
   const difficultyRef = useRef(0);
   const gameStateRef = useRef<GameState>("menu");
   const destroyedRef = useRef(0);
+  const overBrandRef = useRef(false);
 
   const WRef = useRef(0);
   const HRef = useRef(0);
@@ -225,6 +226,16 @@ export function SpaceGame() {
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
       lastMoveRef.current = Date.now();
+
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      if (el) {
+        const style = getComputedStyle(el);
+        const color = style.color.toLowerCase();
+        const bgColor = style.backgroundColor.toLowerCase();
+        const isBrand = (c: string) =>
+          c.includes("249, 115, 22") || c.includes("251, 146, 60") || c.includes("194, 65, 12");
+        overBrandRef.current = isBrand(color) || isBrand(bgColor);
+      }
     };
 
     const handleClick = () => {
@@ -298,7 +309,8 @@ export function SpaceGame() {
           while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
           shipAngleRef.current += angleDiff * 0.1;
         }
-        drawShip(ctx, shipRef.current.x, shipRef.current.y, shipAngleRef.current, false);
+        const shipColor = overBrandRef.current ? "255, 255, 255" : "249, 115, 22";
+        drawShip(ctx, shipRef.current.x, shipRef.current.y, shipAngleRef.current, false, shipColor);
         frameRef.current = requestAnimationFrame(animate);
         return;
       }
@@ -332,7 +344,7 @@ export function SpaceGame() {
           while (angleDiff2 < -Math.PI) angleDiff2 += Math.PI * 2;
           shipAngleRef.current += angleDiff2 * 0.1;
         }
-        drawShip(ctx, shipRef.current.x, shipRef.current.y, shipAngleRef.current, false);
+        drawShip(ctx, shipRef.current.x, shipRef.current.y, shipAngleRef.current, false, overBrandRef.current ? "255, 255, 255" : "249, 115, 22");
 
         frameRef.current = requestAnimationFrame(animate);
         return;
@@ -592,7 +604,7 @@ export function SpaceGame() {
       }
 
       if (gameStateRef.current === "playing") {
-        drawShip(ctx, shipRef.current.x, shipRef.current.y, shipAngleRef.current, invincibilityRef.current > 0);
+        drawShip(ctx, shipRef.current.x, shipRef.current.y, shipAngleRef.current, invincibilityRef.current > 0, overBrandRef.current ? "255, 255, 255" : "249, 115, 22");
       }
 
       frameRef.current = requestAnimationFrame(animate);
