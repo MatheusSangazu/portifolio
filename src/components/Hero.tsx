@@ -32,9 +32,9 @@ export function Hero() {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="text-5xl sm:text-6xl md:text-8xl lg:text-[11rem] font-bold leading-[0.8] tracking-tighter text-white mb-10"
             >
-              BACKEND<br />
+              FULL STACK<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
-                ENGINEER
+                DEVELOPER
               </span>
             </motion.h1>
 
@@ -45,7 +45,7 @@ export function Hero() {
               className="flex flex-col md:flex-row gap-10 items-start md:items-center"
             >
               <p className="text-lg md:text-xl text-text-muted max-w-xl leading-relaxed font-sans border-l-2 border-brand-primary/30 pl-8">
-                Especialista em <span className="text-white font-semibold">Backend e Arquitetura de Sistemas</span>. 
+                Especialista em <span className="text-white font-semibold">Full Stack e Arquitetura de Sistemas</span>. 
                 Desenvolvo APIs robustas, integrações complexas e infraestruturas escaláveis que fazem produtos digitais funcionarem com segurança e alta performance.
               </p>
               

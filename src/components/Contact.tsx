@@ -161,7 +161,7 @@ export function Contact() {
             READY_FOR_NEW_CHALLENGES
           </div>
           <div>
-            © 2026 MATHEUS HENRIQUE // ENGINEER.LOG
+            © 2026 MATHEUS HENRIQUE // DEVELOPER.LOG
           </div>
           <div className="flex gap-10">
             <a href="#hero" className="hover:text-brand-primary transition-colors duration-300">TOP.ROOT</a>

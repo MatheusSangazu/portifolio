@@ -37,7 +37,7 @@ const techStack = [
   },
   {
     icon: FiBox,
-    label: "Backend",
+    label: "Full Stack",
     detail: "API RESTful robusta desenvolvida em Node.js e Express. Relacionamentos complexos gerenciados via ORM Sequelize com banco MySQL.",
   },
   {

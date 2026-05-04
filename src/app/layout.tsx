@@ -25,12 +25,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Matheus Henrique | Software Engineer",
+  title: "Matheus Henrique | Software Developer",
   description:
-    "Especialista em Backend e Arquitetura de Software. Traduzindo regras de negócio em sistemas escaláveis e eficientes.",
+    "Especialista em Full Stack e Arquitetura de Software. Traduzindo regras de negócio em sistemas escaláveis e eficientes.",
   keywords: [
-    "Software Engineer",
-    "Backend Developer",
+    "Software Developer",
+    "Full Stack Developer",
     "Node.js",
     "TypeScript",
     "Python",

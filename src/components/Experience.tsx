@@ -14,16 +14,16 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
-    role: "Responsável Técnico de Automação & IA",
+    role: "Desenvolvedor Full Stack & IA",
     company: "4Growthbr",
     period: "Set/2024 - Atual",
     description:
-      "Desenvolvimento de agentes de Inteligência Artificial para atendimento dinâmico no WhatsApp, integrações complexas de marketing, gestão de servidores VPS e criação de dashboards.",
+      "Arquitetura e desenvolvimento de agentes de IA conversacional no WhatsApp com Evolution API, Redis como buffer de mensagens e MySQL modelado para memória de longo prazo. Construção de APIs em Node.js para coleta de métricas do Meta Ads, dashboards em Metabase e infraestrutura com 8 containers Docker em VPS.",
     stack: [
-      "JavaScript",
       "Node.js",
+      "TypeScript",
       "MySQL",
-      "n8n",
+      "Redis",
       "OpenAI API",
       "Evolution API",
       "Metabase",
@@ -31,26 +31,28 @@ const experiences: ExperienceItem[] = [
     ],
   },
   {
-    role: "Analista de Integrações e Automação",
+    role: "Desenvolvedor de Integrações",
     company: "4Growthbr",
     period: "Mai/2022 - Set/2024",
     description:
-      "Criação de fluxos automatizados unindo código e low-code para recuperação de vendas e nutrição de leads. Conexão entre CRMs, Gateways de Pagamento e Ads via APIs REST.",
+      "Desenvolvimento de integrações via APIs REST conectando CRMs, gateways de pagamento e plataformas de ads. Automação de fluxos de recuperação de vendas e nutrição de leads com leitura intensiva de documentação e adaptação rápida a novos sistemas.",
     stack: [
       "JavaScript",
+      "Node.js",
       "Make",
-      "ActiveCampaign",
-      "Looker Studio",
       "APIs REST",
+      "ActiveCampaign",
+      "Meta Ads",
+      "Looker Studio",
     ],
   },
   {
-    role: "Desenvolvedor Jovem Aprendiz",
+    role: "Desenvolvedor .NET (Aprendiz)",
     company: "Fruteb SA",
     period: "Mar/2021 - Fev/2022",
     description:
-      "Criação de programas voltados para busca e processamento automatizado de arquivos XML.",
-    stack: ["C#", ".NET", "SQL Server", "OpenGL"],
+      "Desenvolvimento em C#/.NET de soluções para processamento automatizado de notas fiscais XML, com integração ao SQL Server para armazenamento e consulta de dados fiscais.",
+    stack: ["C#", ".NET", "SQL Server", "Windows Forms"],
   },
 ];
 

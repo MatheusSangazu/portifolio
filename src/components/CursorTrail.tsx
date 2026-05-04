@@ -452,15 +452,11 @@ export function CursorTrail() {
   const isGame = pathname.startsWith("/game");
 
   useEffect(() => {
-    if (isGame) {
-      document.body.classList.remove("cursor-none");
-    } else {
-      document.body.classList.add("cursor-none");
-    }
+    document.body.classList.add("cursor-none");
     return () => {
       document.body.classList.remove("cursor-none");
     };
-  }, [isGame]);
+  }, []);
 
   return (
     <div className={`fixed inset-0 z-[100] hidden md:block pointer-events-none ${isGame ? "invisible" : ""}`}>

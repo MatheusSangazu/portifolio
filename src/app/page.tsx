@@ -14,9 +14,9 @@ export default function Home() {
       <Hero />
       <TechTicker />
       <About />
+      <Experience />
       <Projects />
       <Automations />
-      <Experience />
       <Publications />
       <Education />
       <Contact />

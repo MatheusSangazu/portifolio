@@ -9,7 +9,6 @@ const technologies = [
   "MySQL",
   "Redis",
   "Docker",
-  "Kubernetes",
   "AWS",
   "Git",
   "REST APIs",
@@ -17,13 +16,10 @@ const technologies = [
   "Express",
   "AdonisJS",
   "Sequelize",
-  "OpenAI",
+  "Next.js",
   "LangChain",
-  "n8n",
-  "Make",
-  "Pipedrive API",
-  "Meta CAPI",
   "Evolution API",
+  "n8n",
   "Streamlit",
   "Pandas",
 ];
@@ -31,12 +27,10 @@ const technologies = [
 const highlighted = new Set([
   "Node.js",
   "TypeScript",
-  "Python",
   "Docker",
-  "OpenAI",
   "Redis",
   "n8n",
-  "Kubernetes",
+
 ]);
 
 function TechItem({ tech }: { tech: string }) {

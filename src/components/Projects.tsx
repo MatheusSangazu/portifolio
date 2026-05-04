@@ -19,7 +19,7 @@ const projects: Project[] = [
     id: "01",
     title: "Torrinco",
     description:
-      "Engine de processamento de linguagem natural (NLP) para gestão financeira via WhatsApp. Transcreve áudios, processa boletos via OCR e orquestra registros em DB.",
+      "Agente de IA financeiro com PWA para gestão financeira via WhatsApp. Transcrição de áudios, processamento de boletos via OCR, registro automático de transações e interface web. API, banco e frontend construídos do zero.",
     stack: ["Node.js", "TypeScript", "Prisma", "OpenAI", "Evolution API"],
     github: "https://github.com/MatheusSangazu/Torrinco",
   },
@@ -138,7 +138,7 @@ export function Projects() {
           </FadeIn>
           <FadeIn delay={0.2}>
             <p className="text-text-muted max-w-xl text-lg leading-relaxed font-sans">
-              Projetos focados em engenharia de backend, sistemas distribuídos e arquitetura de software de alta performance.
+              Projetos focados em engenharia full stack, sistemas distribuídos e arquitetura de software de alta performance.
             </p>
           </FadeIn>
         </div>

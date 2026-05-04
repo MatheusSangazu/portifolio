@@ -45,7 +45,7 @@ export function About() {
             <div className="space-y-8 text-lg text-text-muted leading-relaxed font-sans border-l border-brand-primary/20 pl-8">
               <FadeIn delay={0.2}>
                 <p>
-                  Atuo na <span className="text-white font-semibold underline decoration-brand-primary/30 decoration-2 underline-offset-8">engenharia de software</span> com foco em sistemas de backend e arquitetura de dados. 
+                  Atuo na <span className="text-white font-semibold underline decoration-brand-primary/30 decoration-2 underline-offset-8">engenharia de software</span> com foco em sistemas full stack e arquitetura de dados. 
                   Minha missão é traduzir regras de negócio complexas em motores eficientes, resilientes e escaláveis.
                 </p>
               </FadeIn>
@@ -55,16 +55,16 @@ export function About() {
                   <span className="text-brand-primary/50 block mb-2">/* logic_initialization */</span>
                   {"{"}<br />
                   &nbsp;&nbsp;"dev": "Matheus_Henrique",<br />
-                  &nbsp;&nbsp;"specialty": "Backend_Architecture",<br />
+                  &nbsp;&nbsp;"specialty": "FullStack_Development",<br />
                   &nbsp;&nbsp;"location": "Sergipe_Brazil",<br />
-                  &nbsp;&nbsp;"experience": "+3_years"<br />
+                  &nbsp;&nbsp;"experience": "+5_years"<br />
                   {"}"}
                 </div>
               </FadeIn>
 
               <FadeIn delay={0.6}>
                 <p>
-                  Minha atuação se divide entre o desenvolvimento de código puro e a arquitetura de automações avançadas com n8n e Make. Construo desde APIs dedicadas até pipelines de dados complexos em low-code, garantindo a melhor ferramenta para cada contexto.
+                  Minha atuação se divide entre o desenvolvimento de código puro e a integração de sistemas com n8n e Make. Construo desde APIs dedicadas até pipelines de dados, escolhendo a melhor ferramenta para cada contexto.
                 </p>
               </FadeIn>
             </div>
