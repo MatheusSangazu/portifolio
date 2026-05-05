@@ -14,7 +14,7 @@ export function Hero() {
       <div className="absolute inset-0 tech-grid pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-center">
           
           <div className="lg:col-span-8">
             <motion.div
@@ -30,7 +30,7 @@ export function Hero() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-5xl sm:text-6xl md:text-8xl lg:text-[11rem] font-bold leading-[0.8] tracking-tighter text-white mb-10"
+              className="text-5xl sm:text-6xl md:text-8xl lg:text-8xl xl:text-[10rem] font-bold leading-[0.8] tracking-tighter text-white mb-10"
             >
               FULL STACK<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
@@ -57,12 +57,12 @@ export function Hero() {
             </motion.div>
           </div>
 
-          <div className="lg:col-span-4 flex justify-center lg:justify-end">
+          <div className="lg:col-span-4 flex justify-center lg:justify-end mt-14 lg:mt-0">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
-              className="relative w-56 h-72 sm:w-64 sm:h-80 md:w-80 md:h-[30rem]"
+              className="relative w-48 h-64 sm:w-64 sm:h-80 md:w-80 md:h-[30rem]"
             >
               <div className="absolute inset-0 border border-brand-primary/10 translate-x-4 translate-y-4 -z-10" />
               
@@ -86,7 +86,7 @@ export function Hero() {
                 </div>
               </div>
 
-              <div className="absolute -left-12 bottom-20 bg-brand-primary text-white px-4 py-2 font-bold text-[10px] -rotate-90 tracking-[0.5em] hidden sm:block">
+              <div className="absolute -left-12 bottom-36 bg-brand-primary text-white px-4 py-2 font-bold text-[10px] -rotate-90 tracking-[0.5em] hidden sm:block">
                 SOFTWARE_ENG
               </div>
             </motion.div>
@@ -97,7 +97,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="mt-12 sm:mt-20 flex flex-wrap gap-4 sm:gap-8 items-center"
+          className="mt-16 sm:mt-20 mb-8 flex flex-wrap gap-4 sm:gap-8 items-center"
         >
           <a
             href="#projetos"

@@ -52,7 +52,7 @@ export function TechTicker() {
   const doubled = [...technologies, ...technologies];
 
   return (
-    <section className="py-12 border-y border-border/30 bg-surface/20 overflow-hidden relative">
+    <section className="py-10 sm:py-14 border-y border-border/30 bg-surface/20 overflow-hidden relative">
       <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
