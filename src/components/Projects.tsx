@@ -44,9 +44,9 @@ const projects: Project[] = [
     id: "04",
     title: "Check Fácil",
     description:
-      "Plataforma PWA para gestão de eventos infantis que une segurança e captação de leads. Desenvolvida em monorepo, a solução automatiza o check-in em tempo real, gerencia convidados e integra cronogramas diretamente com o Google Agenda.",
-    stack: ["Node.js", "Express", "Sequelize", "MySQL", "JWT"],
-    github: "https://github.com/MatheusSangazu/check-facil-api",
+      "PWA para gestão completa de festas infantis. Gerenciamento de eventos e convidados com check-in em tempo real, disparos de mensagem automáticos via Evolution API para confirmação de presença, rate limiting para controle de requisições e autenticação JWT. Monorepo com frontend React e API Node.js.",
+    stack: ["React", "TypeScript", "Node.js", "Express", "MySQL", "JWT", "Evolution API", "Docker"],
+    github: "https://github.com/ForjaCorp/checkFacil",
     caseStudy: "/check-facil",
   },
   {

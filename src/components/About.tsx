@@ -57,7 +57,7 @@ export function About() {
                   &nbsp;&nbsp;"dev": "Matheus_Henrique",<br />
                   &nbsp;&nbsp;"specialty": "FullStack_Development",<br />
                   &nbsp;&nbsp;"location": "Sergipe_Brazil",<br />
-                  &nbsp;&nbsp;"experience": "+5_years"<br />
+                  &nbsp;&nbsp;"experience": "since_2021"<br />
                   {"}"}
                 </div>
               </FadeIn>

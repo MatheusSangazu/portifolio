@@ -57,13 +57,22 @@ export function Education() {
                 <h3 className="text-lg font-bold text-white uppercase tracking-tighter">Formação Acadêmica</h3>
               </div>
 
-              <div className="flex-1 flex flex-col justify-center">
+              <div className="flex-1 flex flex-col justify-center gap-8">
                 <div className="border-l-2 border-brand-primary pl-6">
                   <h4 className="text-base font-semibold text-white uppercase tracking-tight">
                     Análise e Desenvolvimento de Sistemas
                   </h4>
                   <p className="text-sm text-text-muted mt-1 font-sans italic">
                     Universidade Uninassau • 2023 - 2025
+                  </p>
+                </div>
+
+                <div className="border-l-2 border-brand-primary pl-6">
+                  <h4 className="text-base font-semibold text-white uppercase tracking-tight">
+                    C# Completo - Programação Orientada a Objetos
+                  </h4>
+                  <p className="text-sm text-text-muted mt-1 font-sans italic">
+                    Udemy - Prof Nelio Alves - 38h • 2025
                   </p>
                 </div>
               </div>

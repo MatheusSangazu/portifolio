@@ -44,3 +44,9 @@ next-env.d.ts
 /fluxos
 CV - Matheus - 2026.pdf
 
+# curriculo
+curriculo.html
+curriculo-matheus-henrique.pdf
+generate-pdf.mjs
+curriculo-preview.png
+package-lock.json
