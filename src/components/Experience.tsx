@@ -14,20 +14,28 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
-    role: "Desenvolvedor Full Stack & IA",
+    role: "Desenvolvedor Full Stack",
     company: "4Growthbr",
     period: "Set/2024 - Atual",
     description:
-      "Arquitetura e desenvolvimento de agentes de IA conversacional no WhatsApp com Evolution API, Redis como buffer de mensagens e MySQL modelado para memória de longo prazo. Construção de APIs em Node.js para coleta de métricas do Meta Ads, dashboards em Metabase e infraestrutura com 8 containers Docker em VPS.",
+      "Atuo como desenvolvedor full stack responsável por toda a esteira técnica, da arquitetura ao deploy. Trabalho de forma autônoma, entregando sistemas sob demanda para necessidades internas e clientes externos. Desenvolvo agentes de IA conversacional no WhatsApp com Evolution API, Redis como buffer de mensagens e MySQL modelado para memória de longo prazo. Construo APIs em Node.js para coleta de métricas do Meta Ads, dashboards em Metabase e mantenho a infraestrutura com 8 containers Docker em VPS. Também tenho experiência com plugins para WordPress, integrações com plataformas de anúncios e soluções web completas conforme a demanda.",
     stack: [
       "Node.js",
+      "React",
+      "PHP",
+      "JavaScript",
+      "Python",
       "TypeScript",
       "MySQL",
+      "Postgres",
       "Redis",
       "OpenAI API",
       "Evolution API",
       "Metabase",
+      "DataStudio",
       "Docker",
+      "WordPress",
+      "n8n",
     ],
   },
   {
@@ -35,11 +43,12 @@ const experiences: ExperienceItem[] = [
     company: "4Growthbr",
     period: "Mai/2022 - Set/2024",
     description:
-      "Desenvolvimento de integrações via APIs REST conectando CRMs, gateways de pagamento e plataformas de ads. Automação de fluxos de recuperação de vendas e nutrição de leads com leitura intensiva de documentação e adaptação rápida a novos sistemas.",
+      "Desenvolvimento de integrações via APIs REST conectando CRMs, gateways de pagamento e plataformas de ads. Construção de automações de fluxos de vendas e nutrição de leads utilizando Make e n8n, com leitura e interpretação de documentação técnica de diversas APIs para adaptação rápida a novos sistemas.",
     stack: [
       "JavaScript",
       "Node.js",
       "Make",
+      "n8n",
       "APIs REST",
       "ActiveCampaign",
       "Meta Ads",
@@ -51,7 +60,7 @@ const experiences: ExperienceItem[] = [
     company: "Fruteb SA",
     period: "Mar/2021 - Fev/2022",
     description:
-      "Desenvolvimento em C#/.NET de soluções para processamento automatizado de notas fiscais XML, com integração ao SQL Server para armazenamento e consulta de dados fiscais.",
+      "Desenvolvimento em C#/.NET de soluções para processamento automatizado de notas fiscais XML, com integração ao SQL Server para armazenamento e consulta de dados fiscais. Resolução de problemas de lógica de programação e criação de ferramentas para otimização de processos administrativos.",
     stack: ["C#", ".NET", "SQL Server", "Windows Forms"],
   },
 ];

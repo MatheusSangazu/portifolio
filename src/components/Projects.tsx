@@ -66,6 +66,14 @@ const projects: Project[] = [
     github: "https://github.com/LAIHC-org/brazil.clihc2026",
     live: "https://clihc2026.laihc.org/pt/",
   },
+  {
+    id: "07",
+    title: "Ultimate Post Type",
+    description:
+      "Plugin WordPress para imobiliárias que permite cadastrar imóveis sem usar a interface nativa do WordPress. Painel front-end interativo com CRUD, galeria de mídia e filtros. Importação automática diária via XML de sistemas externos e cards visuais para listar imóveis na grade do site.",
+    stack: ["PHP", "WordPress", "JavaScript", "Elementor", "MySQL"],
+    github: "https://github.com/Pdroinho/Ultimate-Post-Type",
+  },
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
