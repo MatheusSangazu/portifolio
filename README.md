@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfólio — Matheus Henrique
 
-## Getting Started
+Portfólio profissional de **Matheus Henrique**, **Desenvolvedor Full Stack e Analista de Sistemas**. O site apresenta trajetória, projetos, serviços, publicações acadêmicas e canais de contato, com foco em desenvolvimento de software, aplicações web, APIs, bancos de dados e análise de sistemas.
 
-First, run the development server:
+## Posicionamento profissional
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Desenvolvimento de software** (full stack)
+- **Aplicações web**, **APIs** e **sistemas de gestão**
+- **Análise e evolução de sistemas**
+- **C# e ecossistema .NET** (ASP.NET Core, Entity Framework)
+- **Node.js, Next.js e React**
+- **Bancos de dados relacionais** (PostgreSQL, MySQL, SQL)
+- **Regras de negócio e compreensão de processos**
+
+Automações, n8n, integrações, chatbots, agentes de IA e dashboards aparecem como competências e serviços complementares.
+
+## Stack do projeto
+
+- [Next.js](https://nextjs.org/) (App Router, geração estática)
+- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/) v4
+- [Framer Motion](https://www.framer.com/motion/) (animações discretas)
+- [react-icons](https://react-icons.github.io/react-icons/) e [lucide-react](https://lucide.dev/)
+
+## Estrutura
+
+```
+public/
+  images/              # Foto de perfil e imagens reais
+  favicon.svg
+src/
+  app/                 # Rotas (App Router)
+    page.tsx           # Home
+    layout.tsx         # Layout, metadata global, JSON-LD, skip link
+    robots.ts          # robots.txt
+    sitemap.ts         # sitemap.xml
+    projetos/[slug]/   # Páginas individuais de projetos (generateStaticParams)
+    check-facil/       # Redirecionamento para /projetos/check-facil
+    game/              # Easter egg (jogo)
+  components/          # Componentes de UI
+  data/                # Conteúdo centralizado e tipado
+    profile.ts
+    experiences.ts
+    projects.ts
+    services.ts
+Dockerfile
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Conteúdo centralizado
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Os dados estão em arquivos tipados para facilitar a manutenção:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/data/profile.ts` — dados pessoais, hero, sobre e grupos de competências
+- `src/data/experiences.ts` — experiências profissionais
+- `src/data/projects.ts` — projetos (destaque e demais), com campos para a página individual
+- `src/data/services.ts` — serviços e link de contato
 
-## Learn More
+## Instalação e execução local
 
-To learn more about Next.js, take a look at the following resources:
+Requer Node.js 20+.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm install
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Acesse [http://localhost:3000](http://localhost:3000).
 
-## Deploy on Vercel
+## Docker
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+O projeto inclui `Dockerfile` (modo `standalone`).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+docker build -t portfolio-matheus .
+docker run -p 3000:3000 portfolio-matheus
+```
+
+## Build
+
+```bash
+npm run build
+npm start
+```
+
+## Qualidade de código
+
+```bash
+npm run lint        # ESLint
+npm run typecheck   # tsc --noEmit
+npm run build       # build de produção
+npm run check       # lint + typecheck + build
+```
+
+O workflow do GitHub Actions (`.github/workflows/ci.yml`) executa `lint`, `typecheck` e `build` a cada push/PR.
+
+## Manutenção dos dados
+
+### Adicionar um projeto
+
+1. Edite `src/data/projects.ts`.
+2. Crie um objeto `Project` com `slug`, `title`, `summary`, `status`, `featured`, `stack`, `problem`, `solution`, `role`, `context`, `features`, `challenges`, `learnings` e (opcional) `github`, `live`, `image`, `notice`.
+3. A rota `/projetos/[slug]` é gerada automaticamente via `generateStaticParams`.
+
+### Atualizar experiência
+
+Edite `src/data/experiences.ts`.
+
+### Atualizar serviços
+
+Edite `src/data/services.ts`.
+
+### Atualizar dados pessoais
+
+Edite `src/data/profile.ts`.
+
+## Deploy
+
+O deploy pode ser feito em qualquer plataforma compatível com Next.js (ex.: Vercel). O `Dockerfile` gera uma imagem otimizada com `output: "standalone"`.
+
+## Notas
+
+- A identidade visual é escura com detalhes em laranja.
+- O jogo `/game` é um _easter egg_, acessado voluntariamente por um link discreto no rodapé.
+- Links externos utilizam `rel="noopener noreferrer"`.
+- O suporte a `prefers-reduced-motion` pausa tickers e animações contínuas.

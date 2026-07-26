@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 
 interface Vec2 {
@@ -140,6 +140,42 @@ function drawShip(ctx: CanvasRenderingContext2D, x: number, y: number, angle: nu
   ctx.restore();
 }
 
+/**
+ * Detecta se o CursorTrail deve ser ativado: apenas em dispositivos com
+ * ponteiro fino (mouse) e sem preferência por movimento reduzido.
+ * Usa useSyncExternalStore para evitar setState-in-effect e ser SSR-safe.
+ */
+function subscribeCursorTrail(callback: () => void): () => void {
+  if (typeof window === "undefined") return () => {};
+  const fineMq = window.matchMedia("(pointer: fine)");
+  const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  fineMq.addEventListener("change", callback);
+  motionMq.addEventListener("change", callback);
+  return () => {
+    fineMq.removeEventListener("change", callback);
+    motionMq.removeEventListener("change", callback);
+  };
+}
+
+function getCursorTrailSnapshot(): boolean {
+  if (typeof window === "undefined") return false;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return finePointer && !reducedMotion;
+}
+
+function getCursorTrailServerSnapshot(): boolean {
+  return false;
+}
+
+function useCursorTrailEnabled(): boolean {
+  return useSyncExternalStore(
+    subscribeCursorTrail,
+    getCursorTrailSnapshot,
+    getCursorTrailServerSnapshot,
+  );
+}
+
 export function CursorTrail() {
   const pathname = usePathname();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -150,17 +186,21 @@ export function CursorTrail() {
   const lasersRef = useRef<Laser[]>([]);
   const particlesRef = useRef<ExplosionParticle[]>([]);
   const frameRef = useRef<number>(0);
-  const lastMoveRef = useRef(Date.now());
+  const lastMoveRef = useRef(0);
   const lastLaserRef = useRef(0);
   const defenseModeRef = useRef(false);
   const asteroidTimerRef = useRef(0);
   const overBrandRef = useRef(false);
+  const enabled = useCursorTrailEnabled();
 
   useEffect(() => {
+    if (!enabled) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    lastMoveRef.current = Date.now();
 
     let W = 0;
     let H = 0;
@@ -264,7 +304,6 @@ export function CursorTrail() {
 
         const sx = shipRef.current.x;
         const sy = shipRef.current.y;
-        const angle = shipAngleRef.current;
 
         let nearest: Asteroid | null = null;
         let nearestDist = Infinity;
@@ -447,19 +486,14 @@ export function CursorTrail() {
       window.removeEventListener("click", handleClick);
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [enabled]);
 
   const isGame = pathname.startsWith("/game");
 
-  useEffect(() => {
-    document.body.classList.add("cursor-none");
-    return () => {
-      document.body.classList.remove("cursor-none");
-    };
-  }, []);
+  if (!enabled || isGame) return null;
 
   return (
-    <div className={`fixed inset-0 z-[100] hidden md:block pointer-events-none ${isGame ? "invisible" : ""}`}>
+    <div className="fixed inset-0 z-[100] pointer-events-none" aria-hidden="true">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 pointer-events-none"

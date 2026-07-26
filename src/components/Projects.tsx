@@ -1,130 +1,136 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { FadeIn } from "./FadeIn";
-import { FiExternalLink, FiGithub, FiTerminal, FiChevronRight, FiBookOpen } from "react-icons/fi";
+import { FiExternalLink, FiGithub, FiArrowRight } from "react-icons/fi";
+import Link from "next/link";
+import { featuredProjects, otherProjects, type Project } from "@/data/projects";
 
-interface Project {
-  title: string;
-  description: string;
-  stack: string[];
-  github?: string;
-  live?: string;
-  caseStudy?: string;
-  id: string;
+const statusLabelColor: Record<string, string> = {
+  "Em desenvolvimento": "text-brand-secondary border-brand-secondary/40",
+  "Projeto funcional": "text-emerald-400 border-emerald-500/40",
+  "Projeto colaborativo": "text-sky-400 border-sky-500/40",
+  "Projeto de estudo": "text-text-muted border-border",
+  "MVP de estudo": "text-amber-400 border-amber-500/40",
+};
+
+function StatusBadge({ status }: { status: Project["status"] }) {
+  const color = statusLabelColor[status] ?? "text-text-muted border-border";
+  return (
+    <span
+      className={`inline-block text-[10px] font-mono px-2 py-0.5 border bg-surface/40 uppercase tracking-wider ${color}`}
+    >
+      {status}
+    </span>
+  );
 }
 
-const projects: Project[] = [
-  {
-    id: "01",
-    title: "Torrinco",
-    description:
-      "Agente de IA financeiro com PWA para gestão financeira via WhatsApp. Transcrição de áudios, processamento de boletos via OCR, registro automático de transações e interface web. API, banco e frontend construídos do zero.",
-    stack: ["Node.js", "TypeScript", "Prisma", "OpenAI", "Evolution API"],
-    github: "https://github.com/MatheusSangazu/Torrinco",
-  },
-  {
-    id: "02",
-    title: "BeTalent Payment",
-    description:
-      "Core API multi-gateway com arquitetura baseada em Adapter Pattern. Implementação rigorosa de TDD e Fallback Automático para alta disponibilidade.",
-    stack: ["Node.js", "AdonisJS", "MySQL", "TDD", "Adapter Pattern"],
-    github: "https://github.com/MatheusSangazu/betalent-payment-api",
-  },
-  {
-    id: "03",
-    title: "Canivete Suíço",
-    description:
-      "Kit de ferramentas de engenharia de dados para higienização massiva de leads. Processamento assíncrono de arquivos e automação de pipelines de mídia.",
-    stack: ["Python", "Streamlit", "Pandas", "Docker", "FFmpeg"],
-    github: "https://github.com/MatheusSangazu/formatador",
-    live: "https://formatador.forjacorp.com/",
-  },
-  {
-    id: "04",
-    title: "Check Fácil",
-    description:
-      "PWA para gestão completa de festas infantis. Gerenciamento de eventos e convidados com check-in em tempo real, disparos de mensagem automáticos via Evolution API para confirmação de presença, rate limiting para controle de requisições e autenticação JWT. Monorepo com frontend React e API Node.js.",
-    stack: ["React", "TypeScript", "Node.js", "Express", "MySQL", "JWT", "Evolution API", "Docker"],
-    github: "https://github.com/ForjaCorp/checkFacil",
-    caseStudy: "/check-facil",
-  },
-  {
-    id: "05",
-    title: "Ads Data Pipeline",
-    description:
-      "Middleware ETL de alto rendimento. Orquestração de métricas do Meta Ads com persistência em MySQL e infraestrutura em K3s.",
-    stack: ["Node.js", "TypeScript", "MySQL", "K3s", "Docker"],
-    github: "https://github.com/MatheusSangazu/growth-ads-data-pipeline",
-  },
-  {
-    id: "06",
-    title: "CLIHC 2026",
-    description:
-      "Arquitetura frontend para conferência internacional. Implementação de i18n complexo e deploy automatizado via GitHub Actions.",
-    stack: ["Vue.js", "JavaScript", "i18n", "GitHub Pages"],
-    github: "https://github.com/LAIHC-org/brazil.clihc2026",
-    live: "https://clihc2026.laihc.org/pt/",
-  },
-  {
-    id: "07",
-    title: "Ultimate Post Type",
-    description:
-      "Plugin WordPress para imobiliárias que permite cadastrar imóveis sem usar a interface nativa do WordPress. Painel front-end interativo com CRUD, galeria de mídia e filtros. Importação automática diária via XML de sistemas externos e cards visuais para listar imóveis na grade do site.",
-    stack: ["PHP", "WordPress", "JavaScript", "Elementor", "MySQL"],
-    github: "https://github.com/Pdroinho/Ultimate-Post-Type",
-  },
-];
-
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function FeaturedProjectCard({ project }: { project: Project }) {
   return (
-    <FadeIn delay={index * 0.1} direction="up">
-      <div className="group relative bg-surface border border-border p-5 sm:p-8 hover:bg-surface-hover transition-all duration-300 h-full flex flex-col font-mono">
-        <div className="flex justify-between items-start mb-12">
-          <span className="text-brand-primary text-2xl font-bold opacity-20 group-hover:opacity-100 transition-opacity">
-            {project.id}
-          </span>
-          <div className="flex gap-4">
+    <FadeIn direction="up">
+      <Link
+        href={`/projetos/${project.slug}`}
+        className="focus-ring group relative block bg-surface border border-border p-6 sm:p-8 hover:bg-surface-hover transition-colors duration-300 h-full"
+      >
+        <div className="flex justify-between items-start gap-4 mb-6">
+          <div>
+            <StatusBadge status={project.status} />
+            <h3 className="text-xl sm:text-2xl font-bold mt-3 text-white group-hover:text-brand-primary transition-colors">
+              {project.title}
+            </h3>
+          </div>
+          <FiArrowRight
+            className="text-text-muted group-hover:text-brand-primary group-hover:translate-x-1 transition-all shrink-0"
+            aria-hidden="true"
+          />
+        </div>
+
+        <p className="text-text-muted text-sm leading-relaxed mb-6">
+          {project.summary}
+        </p>
+
+        <div className="flex flex-wrap gap-2 mb-6">
+          {project.stack.slice(0, 6).map((tech) => (
+            <span
+              key={tech}
+              className="px-2 py-0.5 text-[11px] bg-background border border-border text-text-muted rounded"
+            >
+              {tech}
+            </span>
+          ))}
+          {project.stack.length > 6 && (
+            <span className="px-2 py-0.5 text-[11px] text-text-muted">
+              +{project.stack.length - 6}
+            </span>
+          )}
+        </div>
+
+        <div className="flex items-center gap-4 text-text-muted group-hover:text-brand-primary transition-colors text-sm">
+          <span>Ver detalhes</span>
+        </div>
+      </Link>
+    </FadeIn>
+  );
+}
+
+function OtherProjectCard({ project }: { project: Project }) {
+  return (
+    <FadeIn direction="up">
+      <div className="group relative bg-surface border border-border p-5 sm:p-6 hover:bg-surface-hover transition-colors duration-300 h-full flex flex-col">
+        <div className="flex justify-between items-start gap-4 mb-4">
+          <div>
+            <StatusBadge status={project.status} />
+            <h3 className="text-base sm:text-lg font-bold mt-3 text-white group-hover:text-brand-primary transition-colors">
+              {project.title}
+            </h3>
+          </div>
+          <div className="flex items-center gap-3 shrink-0">
             {project.github && (
-              <a href={project.github} target="_blank" className="text-text-muted hover:text-brand-primary transition-colors">
-                <FiGithub size={20} />
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Repositório do GitHub de ${project.title}`}
+                className="focus-ring text-text-muted hover:text-brand-primary transition-colors"
+              >
+                <FiGithub size={18} aria-hidden="true" />
               </a>
             )}
             {project.live && (
-              <a href={project.live} target="_blank" className="text-text-muted hover:text-brand-primary transition-colors">
-                <FiExternalLink size={20} />
-              </a>
-            )}
-            {project.caseStudy && (
-              <a href={project.caseStudy} className="text-text-muted hover:text-brand-primary transition-colors">
-                <FiBookOpen size={20} />
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Abrir projeto ${project.title}`}
+                className="focus-ring text-text-muted hover:text-brand-primary transition-colors"
+              >
+                <FiExternalLink size={18} aria-hidden="true" />
               </a>
             )}
           </div>
         </div>
 
-        <div className="flex-1">
-          <h3 className="text-xl font-bold mb-4 text-white tracking-tighter flex items-center gap-2 group-hover:text-brand-primary transition-colors">
-            <FiTerminal className="text-xs opacity-30" /> {project.title.toUpperCase()}
-          </h3>
-          <p className="text-text-muted text-xs leading-relaxed mb-8 font-sans">
-            {project.description}
-          </p>
+        <p className="text-text-muted text-xs sm:text-sm leading-relaxed mb-4 flex-1">
+          {project.summary}
+        </p>
+
+        <div className="flex flex-wrap gap-x-3 gap-y-1 mb-4">
+          {project.stack.slice(0, 5).map((tech) => (
+            <span
+              key={tech}
+              className="text-[11px] text-text-muted/80 font-mono"
+            >
+              {tech}
+            </span>
+          ))}
         </div>
 
-        <div className="mt-auto space-y-4">
-          <div className="flex flex-wrap gap-x-4 gap-y-2 opacity-40 group-hover:opacity-70 transition-opacity">
-            {project.stack.map((tech) => (
-              <span key={tech} className="text-[10px] uppercase tracking-widest text-brand-secondary">
-                {tech}
-              </span>
-            ))}
-          </div>
-          <div className="pt-4 border-t border-border flex justify-between items-center text-[10px] tracking-widest uppercase text-text-muted">
-            <span>REPOSITORY_INFO</span>
-            <FiChevronRight className="group-hover:translate-x-2 transition-transform group-hover:text-brand-primary" />
-          </div>
-        </div>
+        <Link
+          href={`/projetos/${project.slug}`}
+          className="focus-ring inline-flex items-center gap-2 text-xs text-brand-primary hover:text-brand-secondary transition-colors w-fit"
+        >
+          Ver detalhes
+          <FiArrowRight aria-hidden="true" />
+        </Link>
       </div>
     </FadeIn>
   );
@@ -132,30 +138,48 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export function Projects() {
   return (
-    <section id="projetos" className="py-16 sm:py-24 px-6 bg-background border-t border-border relative">
+    <section
+      id="projetos"
+      aria-labelledby="projects-title"
+      className="py-16 sm:py-24 px-6 bg-background border-t border-border"
+    >
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col mb-12 sm:mb-20">
-          <FadeIn direction="up">
-            <div className="font-mono text-xs text-brand-primary mb-4 tracking-[0.3em] uppercase">
-              // git.log --oneline
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-6 sm:mb-8 text-white">
-              REPOSITÓRIOS<br />
-              <span className="text-brand-primary italic font-serif text-[0.8em]">Selecionados.</span>
-            </h2>
-          </FadeIn>
-          <FadeIn delay={0.2}>
-            <p className="text-text-muted max-w-xl text-lg leading-relaxed font-sans">
-              Projetos focados em engenharia full stack, sistemas distribuídos e arquitetura de software de alta performance.
-            </p>
-          </FadeIn>
-        </div>
+        <FadeIn direction="up">
+          <div className="font-mono text-xs text-brand-primary mb-4 tracking-[0.3em] uppercase">
+            Portfólio
+          </div>
+          <h2
+            id="projects-title"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white"
+          >
+            Projetos em destaque
+          </h2>
+          <p className="text-text-muted max-w-2xl text-base leading-relaxed mb-12">
+            Uma seleção de aplicações, sistemas e ferramentas que desenvolvi ou
+            contribuí, com foco em desenvolvimento full stack e análise de sistemas.
+          </p>
+        </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {featuredProjects.map((project) => (
+            <FeaturedProjectCard key={project.slug} project={project} />
           ))}
         </div>
+
+        {otherProjects.length > 0 && (
+          <>
+            <FadeIn direction="up">
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white mt-16 sm:mt-24 mb-8">
+                Outros projetos
+              </h3>
+            </FadeIn>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {otherProjects.map((project) => (
+                <OtherProjectCard key={project.slug} project={project} />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </section>
   );

@@ -3,67 +3,7 @@
 import { FadeIn } from "./FadeIn";
 import { SectionTitle } from "./SectionTitle";
 import { FiBriefcase } from "react-icons/fi";
-
-interface ExperienceItem {
-  role: string;
-  company: string;
-  period: string;
-  description: string;
-  stack: string[];
-}
-
-const experiences: ExperienceItem[] = [
-  {
-    role: "Desenvolvedor Full Stack",
-    company: "4Growthbr",
-    period: "Set/2024 - Atual",
-    description:
-      "Atuo como desenvolvedor full stack responsável por toda a esteira técnica, da arquitetura ao deploy. Trabalho de forma autônoma, entregando sistemas sob demanda para necessidades internas e clientes externos. Desenvolvo agentes de IA conversacional no WhatsApp com Evolution API, Redis como buffer de mensagens e MySQL modelado para memória de longo prazo. Construo APIs em Node.js para coleta de métricas do Meta Ads, dashboards em Metabase e mantenho a infraestrutura com 8 containers Docker em VPS. Também tenho experiência com plugins para WordPress, integrações com plataformas de anúncios e soluções web completas conforme a demanda.",
-    stack: [
-      "Node.js",
-      "React",
-      "PHP",
-      "JavaScript",
-      "Python",
-      "TypeScript",
-      "MySQL",
-      "Postgres",
-      "Redis",
-      "OpenAI API",
-      "Evolution API",
-      "Metabase",
-      "DataStudio",
-      "Docker",
-      "WordPress",
-      "n8n",
-    ],
-  },
-  {
-    role: "Desenvolvedor de Integrações",
-    company: "4Growthbr",
-    period: "Mai/2022 - Set/2024",
-    description:
-      "Desenvolvimento de integrações via APIs REST conectando CRMs, gateways de pagamento e plataformas de ads. Construção de automações de fluxos de vendas e nutrição de leads utilizando Make e n8n, com leitura e interpretação de documentação técnica de diversas APIs para adaptação rápida a novos sistemas.",
-    stack: [
-      "JavaScript",
-      "Node.js",
-      "Make",
-      "n8n",
-      "APIs REST",
-      "ActiveCampaign",
-      "Meta Ads",
-      "Looker Studio",
-    ],
-  },
-  {
-    role: "Desenvolvedor .NET (Aprendiz)",
-    company: "Fruteb SA",
-    period: "Mar/2021 - Fev/2022",
-    description:
-      "Desenvolvimento em C#/.NET de soluções para processamento automatizado de notas fiscais XML, com integração ao SQL Server para armazenamento e consulta de dados fiscais. Resolução de problemas de lógica de programação e criação de ferramentas para otimização de processos administrativos.",
-    stack: ["C#", ".NET", "SQL Server", "Windows Forms"],
-  },
-];
+import { experiences, type ExperienceItem } from "@/data/experiences";
 
 function TimelineItem({
   experience,
@@ -75,23 +15,29 @@ function TimelineItem({
   const isLast = index === experiences.length - 1;
 
   return (
-    <FadeIn delay={index * 0.15} direction="left">
+    <FadeIn delay={index * 0.1} direction="left">
       <div className="relative flex gap-6 pb-12">
         {!isLast && (
-          <div className="absolute left-5 top-12 w-px h-[calc(100%-3rem)] bg-border" />
+          <div
+            className="absolute left-5 top-12 w-px h-[calc(100%-3rem)] bg-border"
+            aria-hidden="true"
+          />
         )}
 
-        <div className="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-brand-primary/10 border-2 border-brand-primary flex items-center justify-center">
+        <div
+          className="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-brand-primary/10 border-2 border-brand-primary flex items-center justify-center"
+          aria-hidden="true"
+        >
           <FiBriefcase size={16} className="text-brand-primary" />
         </div>
 
         <div className="flex-1 pt-0.5">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
             <div>
-              <h3 className="text-lg font-bold text-foreground font-mono uppercase tracking-tighter">
+              <h3 className="text-lg font-bold text-foreground">
                 {experience.role}
               </h3>
-              <p className="text-brand-primary text-sm font-medium font-mono tracking-widest uppercase opacity-80">
+              <p className="text-brand-primary text-sm font-medium tracking-wide opacity-90">
                 {experience.company}
               </p>
             </div>
@@ -122,11 +68,16 @@ function TimelineItem({
 
 export function Experience() {
   return (
-    <section id="experiencia" className="py-16 sm:py-24 px-6 bg-surface/30">
+    <section
+      id="experiencia"
+      aria-labelledby="experience-title"
+      className="py-16 sm:py-24 px-6 bg-surface/30"
+    >
       <div className="max-w-3xl mx-auto">
         <SectionTitle
+          id="experience-title"
           title="Experiência"
-          subtitle="Trajetória profissional conectando código e resultados de negócio."
+          subtitle="Trajetória profissional em desenvolvimento de software, APIs e análise de sistemas."
         />
 
         <div className="relative">

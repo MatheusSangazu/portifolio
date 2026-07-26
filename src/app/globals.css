@@ -9,7 +9,7 @@
   --color-surface: #1C1917;
   --color-surface-hover: #292524;
   --color-border: #292524;
-  --color-text-muted: #78716C;
+  --color-text-muted: #A8A29E;
   --font-sans: var(--font-plus-jakarta), var(--font-inter);
   --font-mono: 'JetBrains Mono', monospace;
   --font-serif: var(--font-playfair), serif;
@@ -18,7 +18,7 @@
 @layer base {
   .tech-grid {
     background-size: 40px 40px;
-    background-image: 
+    background-image:
       linear-gradient(to right, rgba(249, 115, 22, 0.03) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(249, 115, 22, 0.03) 1px, transparent 1px);
     mask-image: radial-gradient(circle at center, black, transparent 90%);
@@ -30,7 +30,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
+    background:
       radial-gradient(circle at 0% 0%, rgba(249, 115, 22, 0.03) 0%, transparent 50%),
       radial-gradient(circle at 100% 100%, rgba(194, 65, 12, 0.03) 0%, transparent 50%);
     pointer-events: none;
@@ -64,15 +64,6 @@
     animation: pixel-blink 2s ease-in-out infinite;
   }
 
-  @keyframes pixel-wave {
-    0%, 100% { transform: translateY(0); opacity: 0.6; }
-    50% { transform: translateY(-3px); opacity: 1; }
-  }
-
-  .animate-pixel-wave {
-    animation: pixel-wave 1.5s ease-in-out infinite;
-  }
-
   @keyframes poker-glow {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
@@ -97,10 +88,18 @@
     border: 1px solid var(--color-border);
     background: linear-gradient(135deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0) 100%);
   }
+
+  /* Foco visível e consistente para acessibilidade (WCAG AA). */
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -109,14 +108,9 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-body.cursor-none,
-body.cursor-none * {
-  cursor: none !important;
-}
-
 ::selection {
-  background: var(--color-purple-primary);
-  color: white;
+  background: var(--color-brand-primary);
+  color: #0C0A09;
 }
 
 ::-webkit-scrollbar {
@@ -133,5 +127,41 @@ body.cursor-none * {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-purple-primary);
+  background: var(--color-brand-dark);
+}
+
+/* Foco visível padrão para elementos interativos sem estilo customizado. */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/*
+  Respeita usuários com preferência por movimento reduzido:
+  - pausa tickers e animações contínuas;
+  - desativa transições decorativas longas.
+*/
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-pixel-blink,
+  .animate-poker-glow,
+  .animate-warp-in {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

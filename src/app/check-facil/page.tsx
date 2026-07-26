@@ -1,10 +1,7 @@
-import { CheckFacilPage } from "@/components/CheckFacilPage";
+import { redirect } from "next/navigation";
 
-export const metadata = {
-  title: "Check Fácil | Matheus Henrique",
-  description: "Plataforma PWA para gestão de eventos infantis, controle de acesso e captação de leads.",
-};
-
-export default function Page() {
-  return <CheckFacilPage />;
+// Redireciona a rota antiga /check-facil para a nova estrutura /projetos/check-facil,
+// preservando links externos que possam apontar para cá.
+export default function CheckFacilRedirect() {
+  redirect("/projetos/check-facil");
 }

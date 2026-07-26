@@ -2,121 +2,125 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FiArrowDown, FiTerminal, FiCpu, FiCode, FiLayers } from "react-icons/fi";
+import { FiArrowDown, FiMail } from "react-icons/fi";
+import { profile } from "@/data/profile";
 
 export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden bg-background"
+      aria-labelledby="hero-title"
+      className="relative min-h-screen flex items-center justify-center px-6 pt-28 pb-16 overflow-hidden bg-background"
     >
-      {/* Background Tech Grid */}
-      <div className="absolute inset-0 tech-grid pointer-events-none" />
+      <div className="absolute inset-0 tech-grid pointer-events-none" aria-hidden="true" />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-center">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+
           <div className="lg:col-span-8">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               className="font-mono text-brand-primary mb-6 flex items-center gap-3"
             >
-              <div className="w-8 h-[1px] bg-brand-primary" />
-              <span className="text-xs md:text-sm tracking-[0.3em] uppercase">Architecture // Systems // Data</span>
+              <span className="w-8 h-[1px] bg-brand-primary" aria-hidden="true" />
+              <span className="text-[11px] md:text-xs tracking-[0.3em] uppercase">
+                {profile.hero.label}
+              </span>
             </motion.div>
 
             <motion.h1
+              id="hero-title"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-5xl sm:text-6xl md:text-8xl lg:text-8xl xl:text-[10rem] font-bold leading-[0.8] tracking-tighter text-white mb-10"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-white mb-8"
             >
-              FULL STACK<br />
+              Desenvolvedor Full Stack
+              <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
-                DEVELOPER
+                e Analista de Sistemas
               </span>
             </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="text-base md:text-lg text-text-muted max-w-2xl leading-relaxed font-sans border-l-2 border-brand-primary/40 pl-6 mb-8"
+            >
+              {profile.hero.description}
+            </motion.p>
+
+            <motion.ul
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="flex flex-wrap gap-x-6 gap-y-2 mb-10"
+              aria-label="Competências principais"
+            >
+              {profile.hero.competencies.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-2 text-sm text-foreground/90 font-mono"
+                >
+                  <span className="w-1.5 h-1.5 bg-brand-primary rounded-full" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </motion.ul>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="flex flex-col md:flex-row gap-10 items-start md:items-center"
+              transition={{ delay: 0.6 }}
+              className="flex flex-wrap gap-4"
             >
-              <p className="text-lg md:text-xl text-text-muted max-w-xl leading-relaxed font-sans border-l-2 border-brand-primary/30 pl-8">
-                Especialista em <span className="text-white font-semibold">Full Stack e Arquitetura de Sistemas</span>. 
-                Desenvolvo APIs robustas, integrações complexas e infraestruturas escaláveis que fazem produtos digitais funcionarem com segurança e alta performance.
-              </p>
-              
-              <div className="flex flex-col gap-3 font-mono text-[10px] text-brand-primary/60 tracking-widest uppercase">
-                <span className="flex items-center gap-3"><FiLayers /> Distributed Systems</span>
-                <span className="flex items-center gap-3"><FiCode /> High Performance Code</span>
-                <span className="flex items-center gap-3"><FiCpu /> API First Design</span>
-              </div>
+              <a
+                href="#projetos"
+                className="focus-ring inline-flex items-center gap-3 px-6 sm:px-8 py-3.5 bg-white text-background font-semibold text-sm hover:bg-brand-primary hover:text-white transition-colors duration-300"
+              >
+                Ver projetos
+                <FiArrowDown className="group-hover:translate-y-1 transition-transform" aria-hidden="true" />
+              </a>
+              <a
+                href="#contato"
+                className="focus-ring inline-flex items-center gap-3 px-6 sm:px-8 py-3.5 border border-border text-white font-semibold text-sm hover:border-brand-primary transition-colors duration-300"
+              >
+                <FiMail aria-hidden="true" />
+                Entrar em contato
+              </a>
             </motion.div>
           </div>
 
-          <div className="lg:col-span-4 flex justify-center lg:justify-end mt-14 lg:mt-0">
+          <div className="lg:col-span-4 flex justify-center lg:justify-end">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
-              className="relative w-48 h-64 sm:w-64 sm:h-80 md:w-80 md:h-[30rem]"
+              className="relative w-56 h-72 sm:w-64 sm:h-80 md:w-72 md:h-[28rem]"
             >
-              <div className="absolute inset-0 border border-brand-primary/10 translate-x-4 translate-y-4 -z-10" />
-              
+              <div
+                className="absolute inset-0 border border-brand-primary/10 translate-x-4 translate-y-4 -z-10"
+                aria-hidden="true"
+              />
               <div className="w-full h-full bg-surface border border-border overflow-hidden relative group shadow-2xl">
                 <Image
-                  src="/images/MatheusAlves.png"
-                  alt="Matheus Henrique"
+                  src={profile.photo}
+                  alt="Foto de Matheus Henrique"
                   fill
+                  sizes="(max-width: 640px) 224px, (max-width: 768px) 256px, 288px"
                   className="object-cover grayscale contrast-125 brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000"
                   priority
                 />
-                
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
-                
-                <div className="absolute bottom-6 left-6 right-6 font-mono">
-                  <div className="text-[10px] text-brand-primary mb-1 tracking-widest uppercase flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-brand-primary rounded-full shadow-[0_0_8px_var(--color-brand-primary)]" />
-                    Available_for_Scale
-                  </div>
-                  <div className="text-white text-sm font-bold tracking-tighter">MH_ARCHITECT.SYS</div>
-                </div>
-              </div>
-
-              <div className="absolute -left-12 bottom-36 bg-brand-primary text-white px-4 py-2 font-bold text-[10px] -rotate-90 tracking-[0.5em] hidden sm:block">
-                SOFTWARE_ENG
+                <div
+                  className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background via-background/40 to-transparent"
+                  aria-hidden="true"
+                />
               </div>
             </motion.div>
           </div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-16 sm:mt-20 mb-8 flex flex-wrap gap-4 sm:gap-8 items-center"
-        >
-          <a
-            href="#projetos"
-            className="px-6 sm:px-12 py-4 sm:py-5 bg-white text-background font-bold tracking-widest uppercase text-[10px] sm:text-xs hover:bg-brand-primary transition-all duration-300 flex items-center gap-4 group"
-          >
-            Explore_Code <FiArrowDown className="group-hover:translate-y-1 transition-transform" />
-          </a>
-          <a
-            href="#contato"
-            className="px-6 sm:px-12 py-4 sm:py-5 border border-border text-white font-bold tracking-widest uppercase text-[10px] sm:text-xs hover:border-brand-primary transition-all duration-300"
-          >
-            Connect_System
-          </a>
-        </motion.div>
-      </div>
-
-      <div className="absolute bottom-12 right-12 hidden md:flex items-center gap-6 text-text-muted opacity-40">
-        <span className="font-mono text-[9px] uppercase tracking-[0.8em]">Deployment_Ready_2026</span>
-        <div className="w-24 h-[1px] bg-gradient-to-r from-text-muted to-transparent" />
       </div>
     </section>
   );

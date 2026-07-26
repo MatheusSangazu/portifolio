@@ -168,6 +168,9 @@ export function SpaceGame() {
   const [lives, setLives] = useState(MAX_LIVES);
   const [highScore, setHighScore] = useState(0);
   const [warpIn, setWarpIn] = useState(false);
+  // Estados expostos ao render (não podem ser lidos de refs durante o render).
+  const [wave, setWave] = useState(0);
+  const [destroyed, setDestroyed] = useState(0);
 
   const mouseRef = useRef<Vec2>({ x: -200, y: -200 });
   const shipRef = useRef<Vec2>({ x: -200, y: -200 });
@@ -178,7 +181,7 @@ export function SpaceGame() {
   const starsRef = useRef<Star[]>([]);
   const frameRef = useRef<number>(0);
   const lastLaserRef = useRef(0);
-  const lastMoveRef = useRef(Date.now());
+  const lastMoveRef = useRef(0);
   const asteroidTimerRef = useRef(0);
   const scoreRef = useRef(0);
   const livesRef = useRef(MAX_LIVES);
@@ -203,6 +206,8 @@ export function SpaceGame() {
     asteroidTimerRef.current = 0;
     setScore(0);
     setLives(MAX_LIVES);
+    setWave(0);
+    setDestroyed(0);
     gameStateRef.current = "playing";
     setGameState("playing");
   }, []);
@@ -212,6 +217,8 @@ export function SpaceGame() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    lastMoveRef.current = Date.now();
 
     const resize = () => {
       WRef.current = window.innerWidth;
@@ -371,7 +378,11 @@ export function SpaceGame() {
       const now = Date.now();
       const isIdle = now - lastMoveRef.current > IDLE_THRESHOLD;
 
-      difficultyRef.current = Math.floor(destroyedRef.current / 5);
+      const newDifficulty = Math.floor(destroyedRef.current / 5);
+      if (newDifficulty !== difficultyRef.current) {
+        difficultyRef.current = newDifficulty;
+        setWave(newDifficulty);
+      }
       const spawnInterval = Math.max(MIN_SPAWN_INTERVAL, INITIAL_SPAWN_INTERVAL - difficultyRef.current * 150);
 
       asteroidTimerRef.current += 16.67;
@@ -386,7 +397,6 @@ export function SpaceGame() {
 
         const sx = shipRef.current.x;
         const sy = shipRef.current.y;
-        const angle = shipAngleRef.current;
 
         let nearest: Asteroid | null = null;
         let nearestDist = Infinity;
@@ -507,6 +517,7 @@ export function SpaceGame() {
               a.dead = true;
               a.deathTimer = 0;
               destroyedRef.current++;
+              setDestroyed(destroyedRef.current);
               const points = Math.ceil(a.size);
               scoreRef.current += points;
               setScore(scoreRef.current);
@@ -650,9 +661,9 @@ export function SpaceGame() {
             />
           ))}
         </div>
-        {difficultyRef.current > 0 && (
+        {wave > 0 && (
           <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-text-muted">
-            WAVE {difficultyRef.current + 1}
+            WAVE {wave + 1}
           </div>
         )}
       </div>
@@ -668,7 +679,7 @@ export function SpaceGame() {
         <div className="absolute inset-0 flex items-center justify-center z-20">
           <div className="text-center">
             <div className="font-mono text-[10px] tracking-[0.5em] uppercase text-brand-primary/60 mb-6">
-              // UNAUTHORIZED ACCESS
+              {"// UNAUTHORIZED ACCESS"}
             </div>
             <h1 className="text-6xl md:text-8xl font-bold tracking-tighter uppercase text-white mb-4 leading-[0.9]">
               ASTEROID
@@ -702,7 +713,7 @@ export function SpaceGame() {
         <div className="absolute inset-0 flex items-center justify-center z-20">
           <div className="text-center">
             <div className="font-mono text-[10px] tracking-[0.5em] uppercase text-red-500/80 mb-6">
-              // SYSTEM FAILURE
+              {"// SYSTEM FAILURE"}
             </div>
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase text-white mb-2">
               GAME OVER
@@ -715,7 +726,7 @@ export function SpaceGame() {
               {score}
             </div>
             <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-text-muted/50 mb-10">
-              ASTEROIDS DESTROYED: {destroyedRef.current}
+              ASTEROIDS DESTROYED: {destroyed}
             </div>
             {score >= highScore && score > 0 && (
               <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-brand-primary mb-8 animate-pulse">
